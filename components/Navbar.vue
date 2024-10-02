@@ -4,16 +4,7 @@
       <v-container>
         <v-img src="@/public/image/logo.png" alt="Logo" class="w-12"></v-img>
       </v-container>
-      <v-container>
-        <v-text-field
-          variant="plain"
-          density="compact"
-          append-inner-icon="mdi-magnify"
-          hide-details
-          placeholder="Search .."
-          class="border border-gray-200 pb-[7px] px-2 rounded-md italic w-[500px]"
-        ></v-text-field>
-      </v-container>
+      <Search class="border border-gray-200 px-2 pt-0 pb-2 rounded-md italic w-[500px]" />
       <v-container class="text-right">
         <p class="text-gray-500 text-sm font-bold">
           <span class="text-green-500">SIGN IN</span> |

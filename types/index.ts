@@ -14,3 +14,11 @@ export interface Product {
     updatedAt: Date
   }
 }
+
+export interface FilterData {
+  key: string
+  data: {
+    title: string
+    amount: number
+  }[]
+}

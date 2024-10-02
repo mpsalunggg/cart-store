@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ref } from 'vue'
 import type { Product } from '~/types'
 
-export function useFavoriteProduct() {
+export function useProduct() {
   const product = ref<Product[]>([])
   const error = ref<string | null>(null)
   const loading = ref<boolean>(false)
