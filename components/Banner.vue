@@ -13,12 +13,12 @@
               </p>
               <div class="flex lg:flex-row flex-col items-center gap-4">
                 <img
-                  :src="product[5].images[0]"
+                  :src="product[0]?.images[0]"
                   alt="Product Image"
                   class="w-60 h-auto rounded-lg"
                 />
-                <div class="space-y-4">
-                  <p class="text-2xl font-bold">{{ product[5].title }}</p>
+                <div class="space-y-2">
+                  <p class="text-2xl font-bold">{{ product[0]?.title }}</p>
                   <div class="flex gap-4">
                     <div>
                       <p class="text-gray-400">Author</p>
@@ -31,11 +31,19 @@
                   </div>
                   <div>
                     <p class="text-2xl text-green-500 font-bold">
-                      ${{ product[5].price }}
+                      ${{ product[0]?.price }}
                     </p>
-                    <p class="text-md line-through">${{ product[5].price + 20 }}</p>
+                    <p class="text-md line-through">${{ product[0]?.price + 20 }}</p>
                   </div>
-                  <button class="bg-green-500 text-white py-4 px-8 rounded-md">
+                  <div class="flex items-center">
+                    <StarIcon
+                      v-for="index in 5"
+                      :key="index"
+                      class="h-4 w-4 text-yellow-500"
+                    />
+                    <p class="text-gray-500 text-sm">(213)</p>
+                  </div>
+                  <button class="bg-green-500 text-white py-2 px-12 rounded-md">
                     BELI
                   </button>
                 </div>
@@ -91,12 +99,22 @@
 </template>
 
 <script lang="ts">
+import { StarIcon } from "@heroicons/vue/24/solid";
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  components: {
+    StarIcon,
+  },
   setup() {
-    const { product, error, loading } = useProduct();
-    return { product, error, loading };
+    const { product, loading, fetchProduct } = useProduct();
+    const fetchProducts = async () => {
+      const offset = 0;
+      await fetchProduct(offset, 1);
+    };
+
+    fetchProducts();
+    return { product, loading };
   },
 });
 </script>
