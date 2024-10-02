@@ -1,11 +1,11 @@
 <template>
   <div class="border-b border-gray-200">
     <v-container class="flex justify-between items-center py-2">
-      <v-container>
+      <v-container class="custom-padding">
         <v-img src="@/public/image/logo.png" alt="Logo" class="w-12"></v-img>
       </v-container>
       <Search class="border border-gray-200 px-2 pt-0 pb-2 rounded-md italic w-[500px]" />
-      <v-container class="text-right">
+      <v-container class="text-right custom-padding">
         <p class="text-gray-500 text-sm font-bold">
           <span class="text-green-500">SIGN IN</span> |
           <span class="text-gray-800">SIGN UP</span>
@@ -50,3 +50,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.custom-padding {
+  padding: 1rem 0 1rem 0;
+}
+</style>

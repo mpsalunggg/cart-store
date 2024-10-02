@@ -52,3 +52,18 @@ export const FILTER_DATA: FilterData[] = [
     ],
   },
 ]
+
+export const BREADCRUMBS = (href: string, title?: string | null) => {
+  return [
+    {
+      title: 'Home',
+      disabled: false,
+      href: '/',
+    },
+    {
+      title: title,
+      disabled: false,
+      href: href,
+    },
+  ]
+}

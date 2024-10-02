@@ -28,7 +28,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { FILTER_DATA } from "~/data";
+import { FILTER_DATA } from "../../data";
 
 export default defineComponent({
   setup() {

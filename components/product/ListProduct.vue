@@ -2,8 +2,9 @@
   <v-container class="flex flex-col gap-2">
     <h1 class="text-md">Cari Produk</h1>
     <Search class="border border-gray-200 px-2 pt-0 pb-2 rounded-md italic" />
-
-    <h1 v-if="loading">Loading...</h1>
+    <div v-if="loading" class="flex justify-center h-24">
+      <v-progress-circular color="green" indeterminate></v-progress-circular>
+    </div>
     <v-row v-else class="mt-4">
       <v-col v-for="(data, index) in product" :key="index" cols="12" sm="4">
         <v-card>
@@ -20,7 +21,12 @@
             <p class="text-gray-500 text-sm">(213)</p>
           </div>
           <v-card-actions>
-            <button class="bg-green-500 text-white w-full rounded-md py-2">BELI</button>
+            <button
+              class="bg-green-500 text-white w-full rounded-md py-2"
+              @click="redirect(data?.id)"
+            >
+              BELI
+            </button>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -33,12 +39,15 @@
 <script lang="ts">
 import { StarIcon } from "@heroicons/vue/24/solid";
 import { defineComponent, ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import { useProduct } from "../../composables/useProduct";
 
 export default defineComponent({
   components: {
     StarIcon,
   },
   setup() {
+    const router = useRouter();
     const { product, loading, fetchProduct } = useProduct();
     const page = ref(1);
     const itemsPerPage = 6;
@@ -53,8 +62,12 @@ export default defineComponent({
       await fetchProduct(offset, itemsPerPage);
     };
 
+    const redirect = (id: number) => {
+      router.push({ name: "detail-id", params: { id } });
+    };
+
     fetchProducts();
-    return { product, loading, page, fetchProducts, totalPages };
+    return { product, loading, page, fetchProducts, totalPages, redirect };
   },
 });
 </script>

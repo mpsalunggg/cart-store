@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { ref } from 'vue'
 import type { Product } from '~/types'
 
@@ -10,16 +9,38 @@ export function useProduct() {
     loading.value = true
 
     try {
-      const response = await axios.get(
+      const response = await $fetch(
         `https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`
       )
-      product.value = response.data
+      product.value = response as Product[]
     } catch (err: any) {
-      console.log(err.response ? err.response.data.message : err.message)
+      console.error(err.response ? err.response.data.message : err.message)
     } finally {
       loading.value = false
     }
   }
 
   return { product, loading, fetchProduct }
+}
+
+export function useDetailProduct() {
+  const product = ref<Product | null>(null)
+  const loading = ref<boolean>(false)
+
+  const fetchDetailProduct = async (id: number) => {
+    loading.value = true
+
+    try {
+      const response = await $fetch(
+        `https://api.escuelajs.co/api/v1/products/${id}`
+      )
+      product.value = response as Product
+    } catch (err: any) {
+      console.error(err.response ? err.response.data.message : err.message)
+    } finally {
+      loading.value = false
+    }
+  }
+
+  return { product, loading, fetchDetailProduct }
 }

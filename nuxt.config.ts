@@ -29,4 +29,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  components: [
+    { path: '~/components', extensions: ['vue'] },
+    { path: '~/components/product', extensions: ['vue'] },
+    { path: '~/components/common', extensions: ['vue'] },
+  ],
 })

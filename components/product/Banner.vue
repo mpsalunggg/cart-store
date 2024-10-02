@@ -6,7 +6,11 @@
           <div
             class="bg-gray-100 w-full h-full flex items-center justify-center rounded-lg shadow-lg p-4"
           >
-            <p v-if="loading">Loading...</p>
+            <v-progress-circular
+              v-if="loading"
+              color="green"
+              indeterminate
+            ></v-progress-circular>
             <div v-else class="space-y-4 flex flex-col items-center">
               <p class="lg:text-2xl text-xl text-center font-bold">
                 REKOMENDASI PRODUCT TERBARU
@@ -101,6 +105,7 @@
 <script lang="ts">
 import { StarIcon } from "@heroicons/vue/24/solid";
 import { defineComponent } from "vue";
+import { useProduct } from "../../composables/useProduct";
 
 export default defineComponent({
   components: {
